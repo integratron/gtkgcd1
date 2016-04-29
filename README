@@ -1,0 +1,25 @@
+A small integration of the GTK main loop into libdispatch
+
+This project examines the integration of GTK into an ObjC2 program
+that uses libdispatch for concurrency.
+
+Assumptions:
+  - target platform is Linux
+  - libdispatch is the source of concurrency
+
+The module gtkgcd.[hc] uses gdk functions to find the file descriptor
+for X11 events that GTK is listening for.  It then registers a
+dispatch handler this source that updates the GTK display elements.
+
+Files:
+  - gtkgcd: registers a listener for X11 events, provides a 'sync'
+    function for new events
+
+  - TextWindow: an ObjC2 window that displays log events, and can be
+    cleared by pushing the button
+
+  - main: stitches it all together and defines two asynchronous
+    dispatch sources to write to the main window.
+     
+     
+
